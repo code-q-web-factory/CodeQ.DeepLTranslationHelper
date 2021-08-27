@@ -1,0 +1,18 @@
+{
+    "description": "A EEL helper to use the DeepL translation API",
+    "type": "neos-package",
+    "name": "codeq/deepltranslationhelper",
+    "require": {
+        "neos/flow": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "CodeQ\\DeepLTranslationHelper\\": "Classes/"
+        }
+    },
+    "extra": {
+        "neos": {
+            "package-key": "CodeQ.DeepLTranslationHelper"
+        }
+    }
+}
