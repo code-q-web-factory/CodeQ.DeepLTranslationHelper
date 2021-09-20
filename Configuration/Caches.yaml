@@ -1,0 +1,5 @@
+CodeQ_DeepLTranslationHelper_Translation:
+  frontend: Neos\Cache\Frontend\VariableFrontend
+  backend: Neos\Cache\Backend\FileBackend
+  backendOptions:
+    defaultLifetime: 43200

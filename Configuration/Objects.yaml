@@ -1,0 +1,9 @@
+CodeQ\DeepLTranslationHelper\Domain\Service\DeepLService:
+  properties:
+    translationCache:
+      object:
+        factoryObjectName: Neos\Flow\Cache\CacheManager
+        factoryMethodName: getCache
+        arguments:
+          1:
+            value: CodeQ_DeepLTranslationHelper_Translation

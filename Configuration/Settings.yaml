@@ -1,3 +1,10 @@
 CodeQ:
   DeepLTranslationHelper:
-    apiAuthKey: ''
+    DeepLService:
+      baseUri: 'https://api.deepl.com/v2/'
+      apiAuthKey: ''
+
+Neos:
+  Fusion:
+    defaultContext:
+      DeepL: 'CodeQ\DeepLTranslationHelper\EelHelper\TranslationHelper'
