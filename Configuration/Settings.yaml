@@ -3,6 +3,7 @@ CodeQ:
     DeepLService:
       baseUri: 'https://api.deepl.com/v2/'
       apiAuthKey: ''
+    translateRichtextProperties: true
 
 Neos:
   Fusion:
