@@ -5,6 +5,7 @@ namespace CodeQ\DeepLTranslationHelper\Domain\Service;
 use Neos\Flow\Annotations as Flow;
 use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Neos\ContentRepository\Domain\Service\Context;
+use Psr\Log\LoggerInterface;
 
 class NodeTranslationService
 {
@@ -16,7 +17,13 @@ class NodeTranslationService
     protected $deeplService;
 
     /**
-     * @Flow\InjectConfiguration(path="translateRichtextProperties")
+     * @Flow\Inject
+     * @var LoggerInterface
+     */
+    protected $logger;
+
+    /**
+     * @Flow\InjectConfiguration(path="nodeTranslations.translateInlineEditables")
      * @var bool
      */
     protected $translateRichtextProperties;
@@ -35,6 +42,7 @@ class NodeTranslationService
         $sourceLanguage = explode('_', $node->getContext()->getTargetDimensions()['language'])[0];
         $targetLanguage = explode('_', $context->getTargetDimensions()['language'])[0];
 
+        $propertiesToTranslate = [];
         foreach ($adoptedNode->getProperties() as $propertyName => $propertyValue) {
 
             if (empty($propertyValue)) {
@@ -46,10 +54,13 @@ class NodeTranslationService
             if ($propertyDefinitions[$propertyName]['type'] != 'string' || !is_string($propertyValue)) {
                 continue;
             }
+            if ((trim(strip_tags($propertyValue))) == "") {
+                continue;
+            }
 
             $translateProperty = false;
             $isInlineEditable = $propertyDefinitions[$propertyName]['ui']['inlineEditable'] ?? false;
-            $isTranslateEnabled = $propertyDefinitions[$propertyName]['options']['autotranslate'] ?? false;
+            $isTranslateEnabled = $propertyDefinitions[$propertyName]['options']['deeplTranslate'] ?? false;
             if ($this->translateRichtextProperties && $isInlineEditable == true) {
                 $translateProperty = true;
             }
@@ -58,7 +69,13 @@ class NodeTranslationService
             }
 
             if ($translateProperty) {
-                $translatedValue = $this->deeplService->translate($propertyValue, $targetLanguage, $sourceLanguage);
+                $propertiesToTranslate[$propertyName] = $propertyValue;
+            }
+        }
+
+        if (count($propertiesToTranslate) > 0) {
+            $translatedProperties = $this->deeplService->translate($propertiesToTranslate, $targetLanguage, $sourceLanguage);
+            foreach($translatedProperties as $propertyName => $translatedValue) {
                 $adoptedNode->setProperty($propertyName, $translatedValue);
             }
         }

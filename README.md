@@ -19,7 +19,7 @@ If you are using the free API, you need to change the baseUri:
 CodeQ:
   DeepLTranslationHelper:
     DeepLService:
-      baseUri: 'https://api-free.deepl.com/v2/'
+      useFreeApi: true
       apiAuthKey: 'myapikey'
 ```
 
@@ -49,4 +49,28 @@ CodeQ_DeepLTranslationHelper_Translation:
   backend: Neos\Cache\Backend\FileBackend
   backendOptions:
     defaultLifetime: 2592000
+```
+
+
+## Node Translations 
+
+When nodes are copied (adopted) into another languge the fields can be translated automatically.
+
+The following setting enables the translation of all inlineEditable properties. 
+
+```yaml
+CodeQ:
+  DeepLTranslationHelper:
+    nodeTranslations:
+      translateInlineEditables: true
+```
+
+Other properties of type string can be translated aswell with the following configuration.
+
+ ```yaml
+Neos.Neos:Document:
+   properties:
+     title:
+       options:
+         deeplTranslate: true
 ```

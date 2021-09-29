@@ -35,8 +35,8 @@ class TranslationHelper implements ProtectedContextAwareInterface {
         if ($translatedText = $this->translationCache->get($cacheIdentifier)) {
             return $translatedText;
         }
-        $translatedText = $this->deepLService->translate($text, $targetLanguage, $sourceLanguage);
-        $this->translationCache->set($cacheIdentifier, $translatedText);
+        $translatedTexts = $this->deepLService->translate(['text' => $text], $targetLanguage, $sourceLanguage);
+        $this->translationCache->set($cacheIdentifier, $translatedTexts['text']);
         return $translatedText;
     }
 
