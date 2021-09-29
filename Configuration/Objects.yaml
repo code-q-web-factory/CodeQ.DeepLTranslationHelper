@@ -1,4 +1,4 @@
-CodeQ\DeepLTranslationHelper\Domain\Service\DeepLService:
+CodeQ\DeepLTranslationHelper\EelHelper\TranslationHelper:
   properties:
     translationCache:
       object:

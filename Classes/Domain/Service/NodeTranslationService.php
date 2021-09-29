@@ -35,7 +35,7 @@ class NodeTranslationService
         $sourceLanguage = explode('_', $node->getContext()->getTargetDimensions()['language'])[0];
         $targetLanguage = explode('_', $context->getTargetDimensions()['language'])[0];
 
-        foreach ($node->getProperties() as $propertyName => $propertyValue) {
+        foreach ($adoptedNode->getProperties() as $propertyName => $propertyValue) {
 
             if (empty($propertyValue)) {
                 continue;
