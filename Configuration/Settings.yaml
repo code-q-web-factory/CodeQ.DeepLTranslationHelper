@@ -1,8 +1,16 @@
 CodeQ:
   DeepLTranslationHelper:
     DeepLService:
-      baseUri: 'https://api.deepl.com/v2/'
+      useFreeApi: false
       apiAuthKey: ''
+      baseUri: 'https://api.deepl.com/v2/'
+      baseUriFree: 'https://api-free.deepl.com/v2/'
+
+      defaultOptions:
+        tag_handling: 'xml'
+        split_sentences: 'nonewlines'
+        preserve_formatting: 1
+        formality: "default"
 
 Neos:
   Fusion:

@@ -3,6 +3,7 @@
 namespace CodeQ\DeepLTranslationHelper\EelHelper;
 
 use CodeQ\DeepLTranslationHelper\Domain\Service\DeepLService;
+use Neos\Cache\Frontend\VariableFrontend;
 use Neos\Flow\Annotations as Flow;
 use Neos\Eel\ProtectedContextAwareInterface;
 
@@ -15,6 +16,12 @@ class TranslationHelper implements ProtectedContextAwareInterface {
     protected $deepLService;
 
     /**
+     * @Flow\Inject
+     * @var VariableFrontend
+     */
+    protected $translationCache;
+
+    /**
      * @param string      $text
      * @param string      $targetLanguage
      * @param string|null $sourceLanguage
@@ -23,7 +30,14 @@ class TranslationHelper implements ProtectedContextAwareInterface {
      */
     public function translate(string $text, string $targetLanguage, string $sourceLanguage = null): string
     {
-        return $this->deepLService->translate($text, $targetLanguage, $sourceLanguage);
+        // See: https://ideone.com/embed/0iwuGn
+        $cacheIdentifier = sprintf('%s-%s-%s', hash('haval256,3', $text), $sourceLanguage, $targetLanguage);
+        if ($translatedText = $this->translationCache->get($cacheIdentifier)) {
+            return $translatedText;
+        }
+        $translatedTexts = $this->deepLService->translate(['text' => $text], $targetLanguage, $sourceLanguage);
+        $this->translationCache->set($cacheIdentifier, $translatedTexts['text']);
+        return $translatedText;
     }
 
     /**

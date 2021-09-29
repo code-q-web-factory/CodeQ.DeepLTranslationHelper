@@ -3,7 +3,8 @@
     "type": "neos-package",
     "name": "codeq/deepltranslationhelper",
     "require": {
-        "neos/flow": "*"
+        "neos/flow": "*",
+        "neos/http-factories": "*"
     },
     "autoload": {
         "psr-4": {
