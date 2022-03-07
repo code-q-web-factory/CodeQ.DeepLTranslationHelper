@@ -1,5 +1,7 @@
 # CodeQ.DeepLTranslationHelper
 
+## Deprecated in favor of [Sitegeist.LostInTranslation](https://github.com/sitegeist/Sitegeist.LostInTranslation)
+
 Provides an EEL helper to translate texts via the DeepL API.
 
 ## Installation
