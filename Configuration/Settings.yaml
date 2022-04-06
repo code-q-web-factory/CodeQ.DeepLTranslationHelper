@@ -12,6 +12,18 @@ CodeQ:
         preserve_formatting: 1
         formality: "default"
 
+      baseUri: 'https://api.deepl.com/v2/'
+      baseUriFree: 'https://api-free.deepl.com/v2/'
+
+      defaultOptions:
+        tag_handling: 'xml'
+        split_sentences: 'nonewlines'
+        preserve_formatting: 1
+        formality: "default"
+
+    nodeTranslations:
+      translateInlineEditables: true
+
 Neos:
   Fusion:
     defaultContext:

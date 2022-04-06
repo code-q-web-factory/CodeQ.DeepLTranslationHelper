@@ -1,0 +1,11 @@
+'Neos.Neos:Document':
+  properties:
+    title:
+      options:
+        deeplTranslate: true
+    titleOverride:
+      options:
+        deeplTranslate: true
+    metaDescription:
+      options:
+        deeplTranslate: true
